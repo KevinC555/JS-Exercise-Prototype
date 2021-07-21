@@ -61,6 +61,7 @@ Person.prototype.toString = function () {
 
 
 
+
 /*
   TASK 2
 	- Write a Car constructor that initializes `model` and `milesPerGallon` from arguments.
@@ -75,9 +76,20 @@ Person.prototype.toString = function () {
 		+ The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
+function Car(model, milesPerGallon) {
+	this.model = model;
+	this.milesPerGallon = milesPerGallon;
+	this.tank = 0;
+	this.odometer = 0;
 }
+
+Car.prototype.fill = function (gallons) {
+	return this.tank = this.tank + gallons;
+}
+
+// const jeep = new Car('Jeep', 50);
+
+// jeep.fill(30);
 
 
 /*
@@ -87,18 +99,27 @@ function Car() {
 	- Besides the methods on Person.prototype, babies have the ability to `.play()`:
 		+ Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
-
+function Baby(name, age, favoriteToy) {
+	Person.call(this, name, age)
+	this.favoriteToy = favoriteToy;
 }
+
+Baby.prototype = Object.create(Person.prototype);
+
+Baby.prototype.play = function () {
+	return `Playing with ${this.favoriteToy}`;
+}
+
+
 
 
 /* 
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. There's encapsulation, which is where variables are not exposed directly.
+  2. Abstraction is only seeing the outside of an elemnt or car, not being b ale to see what's happening on the inside.
+  3. Inheritance which means the parent can pass things to the child, however the child cannot pass things back up the line back to the parent.
+  4. Polymorphism is where we can add the same thing to different objects, an example being car and motorcycle. We can add the method of drive to both objects.
 */
 
 
